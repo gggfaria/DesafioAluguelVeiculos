@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.9.0" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Configurations\People\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DesafioBackEnd.Domain\DesafioBackEnd.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

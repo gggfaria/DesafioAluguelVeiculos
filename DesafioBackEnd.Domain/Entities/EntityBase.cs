@@ -7,7 +7,6 @@ public abstract class EntityBase
     protected EntityBase()
     {
         Id = Guid.NewGuid();
-        CreationDate = DateTime.Now;
         IsActive = true;
         ValidationResultData = new ValidationResult();
     }
