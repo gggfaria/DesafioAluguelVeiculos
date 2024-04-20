@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace DesafioBackEnd.Domain.Validators.People;
 
-public class DeliverymanValidator : AbstractValidator<Deliveryman>
+public class DeliverymanValidator : AbstractValidator<Driver>
 {
     public DeliverymanValidator()
     {

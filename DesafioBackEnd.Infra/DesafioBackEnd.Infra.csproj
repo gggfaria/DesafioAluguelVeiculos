@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Configurations\People\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\DesafioBackEnd.Domain\DesafioBackEnd.Domain.csproj" />
     </ItemGroup>
 

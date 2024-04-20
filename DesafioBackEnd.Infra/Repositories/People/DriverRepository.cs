@@ -3,9 +3,9 @@ using DesafioBackEnd.Infra.Context;
 
 namespace DesafioBackEnd.Infra.Repositories.People;
 
-public class DeliverymanRepository : RepositoryBase<Deliveryman>
+public class DriverRepository : RepositoryBase<Driver>
 {
-    public DeliverymanRepository(DesafioContext context) : base(context)
+    public DriverRepository(DesafioContext context) : base(context)
     {
     }
 }

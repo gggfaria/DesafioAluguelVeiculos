@@ -20,5 +20,8 @@ public class MotorcycleConfig : EntityBaseConfig<Motorcycle>
         builder.Property(p => p.LicencePlate)
             .IsRequired()
             .HasColumnType($"varchar(20)");
+        
+        builder.HasIndex(p => p.LicencePlate)
+            .IsUnique();
     }
 }

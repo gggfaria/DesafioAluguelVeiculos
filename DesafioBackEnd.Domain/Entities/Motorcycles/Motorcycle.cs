@@ -5,7 +5,6 @@ namespace DesafioBackEnd.Domain.Entities.Motorcycles;
 public class Motorcycle : EntityBase
 {
     public Motorcycle(string model, int year, string licencePlate)
-        : base()
     {
         Model = model;
         Year = year;

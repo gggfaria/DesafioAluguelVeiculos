@@ -6,9 +6,9 @@ using DesafioBackEnd.Domain.Validators.ValueObjects;
 
 namespace DesafioBackEnd.Domain.Entities.People;
 
-public class Deliveryman : Person
+public class Driver : Person
 {
-    public Deliveryman(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber, ECnhType cnhType, string cnhImage) :
+    public Driver(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber, ECnhType cnhType, string cnhImage) :
         base(name, userName, password)
     {
         Cnpj = cnpj;
@@ -23,6 +23,11 @@ public class Deliveryman : Person
     public string CnhNumber { get; private set; }
     public ECnhType CnhType { get; set; }
     public string CnhImage { get; set; }
+
+    public bool HasCnhTypeA()
+    {
+        return CnhType is ECnhType.A or ECnhType.AB;
+    }
 
     
     public override bool IsValid()

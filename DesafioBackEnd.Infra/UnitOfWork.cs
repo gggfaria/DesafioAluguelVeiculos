@@ -1,21 +1,23 @@
 using DesafioBackEnd.Domain.Repositories;
+using DesafioBackEnd.Domain.Repositories.Motorcycles;
 using DesafioBackEnd.Infra.Context;
+using DesafioBackEnd.Infra.Repositories.Motorcycles;
 
 namespace DesafioBackEnd.Infra;
 
 public class UnitOfWork : IUnitOfWork
 {
     protected readonly DesafioContext _context;
-    private IInstituicaoRepository _instituicoes;
+    private IMotorcycleRepository _motorcycleRepository;
 
     public UnitOfWork(DesafioContext context)
     {
         _context = context;
     }
 
-    public IInstituicaoRepository Instituicoes
+    public IMotorcycleRepository Motorcycle
     {
-        get { return _instituicoes ??= new InstituicaoRepository(_context); }
+        get { return _motorcycleRepository ??= new MotorcycleRepository(_context); }
     }
 
 
