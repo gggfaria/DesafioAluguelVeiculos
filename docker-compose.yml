@@ -1,0 +1,26 @@
+﻿services:
+  testefrogpay.web:
+    image: desafiobackend.web
+    build:
+      context: .
+      dockerfile: DesafioBackEnd.Api/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - "postgres"
+    networks:
+      - desafiobackend-network
+  
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: test
+    ports:
+      - 5432:5432
+    networks:
+      - desafiobackend-network
+        
+networks:
+  desafiobackend-network:
+    driver: bridge 

@@ -1,5 +1,6 @@
 using DesafioBackEnd.Domain.Entities;
 using DesafioBackEnd.Domain.Repositories;
+using DesafioBackEnd.Infra;
 using DesafioBackEnd.Infra.Context;
 using DesafioBackEnd.Service.Interfaces.People;
 using DesafioBackEnd.Service.Services.People;
@@ -57,7 +58,7 @@ builder.Services.AddDbContext<DesafioContext>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<IUnitOfWork, IUnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();

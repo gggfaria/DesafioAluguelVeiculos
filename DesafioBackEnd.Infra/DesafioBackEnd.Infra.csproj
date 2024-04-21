@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.9.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.29">
+      </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
     </ItemGroup>
 
