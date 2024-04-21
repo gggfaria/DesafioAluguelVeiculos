@@ -16,7 +16,6 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
         _context = context;
     }
 
-
     public async Task<TEntity> GetAsync(Guid id, bool asNoTracking)
     {
         IQueryable<TEntity> query = _context.Set<TEntity>().AsQueryable();
@@ -25,6 +24,7 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
 
         return await query.SingleOrDefaultAsync(e => e.Id.Equals(id));
     }
+
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(int skip = 0, int limit = int.MaxValue)
     {

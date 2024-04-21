@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DesafioBackEnd.Domain.Validators.People;
 
-public class DeliverymanValidator : AbstractValidator<Driver>
+public class DriverValidator : AbstractValidator<Driver>
 {
-    public DeliverymanValidator()
+    public DriverValidator()
     {
         RuleFor(p => p.CnhType)
             .NotEmpty()

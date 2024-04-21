@@ -8,8 +8,8 @@ namespace DesafioBackEnd.Domain.Entities.People;
 
 public class Driver : Person
 {
-    public Driver(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber, ECnhType cnhType, string cnhImage) :
-        base(name, userName, password)
+    public Driver(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber, ECnhType cnhType, string cnhImage, string permission) :
+        base(name, userName, password, permission)
     {
         Cnpj = cnpj;
         DateOfBirth = dateOfBirth;
@@ -34,7 +34,7 @@ public class Driver : Person
     {
         base.IsValid();
 
-        var deliverymanValidator = new DeliverymanValidator();
+        var deliverymanValidator = new DriverValidator();
         var cnpjValidator = new CNPJValidator();
         
         var resultDeliverymanValidator = deliverymanValidator.Validate(this);

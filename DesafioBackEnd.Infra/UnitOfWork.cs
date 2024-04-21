@@ -1,7 +1,9 @@
 using DesafioBackEnd.Domain.Repositories;
 using DesafioBackEnd.Domain.Repositories.Motorcycles;
+using DesafioBackEnd.Domain.Repositories.People;
 using DesafioBackEnd.Infra.Context;
 using DesafioBackEnd.Infra.Repositories.Motorcycles;
+using DesafioBackEnd.Infra.Repositories.People;
 
 namespace DesafioBackEnd.Infra;
 
@@ -9,6 +11,7 @@ public class UnitOfWork : IUnitOfWork
 {
     protected readonly DesafioContext _context;
     private IMotorcycleRepository _motorcycleRepository;
+    private IPersonRepository _personRepository;
 
     public UnitOfWork(DesafioContext context)
     {
@@ -18,6 +21,11 @@ public class UnitOfWork : IUnitOfWork
     public IMotorcycleRepository Motorcycle
     {
         get { return _motorcycleRepository ??= new MotorcycleRepository(_context); }
+    }
+    
+    public IPersonRepository Person
+    {
+        get { return _personRepository ??= new PersonRepository(_context); }
     }
 
 
