@@ -27,4 +27,8 @@ public class DriverConfig : EntityBaseConfig<Driver>
             .HasColumnType("varchar(20)")
             .IsRequired();
     }
+
+    public override void ConfigureBase(EntityTypeBuilder<Driver> builder)
+    {
+    }
 }

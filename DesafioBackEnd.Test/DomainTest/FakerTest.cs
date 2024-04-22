@@ -13,37 +13,36 @@ public static class FakerTest
         var cnhType = new Faker().PickRandom(ECnhType.AB, ECnhType.B, ECnhType.A);
         var driver = new Faker<Driver>(locale: "pt_BR")
             .CustomInstantiator(f => new Driver(
-                f.Name.FullName(),
-                f.Name.FirstName(),
-                f.Lorem.Word(),
-                new CNPJ(f.Company.Cnpj()),
-                f.Date.Past(),
-                f.Lorem.Word(), 
-                cnhType,
-                f.Image.Locale,
-                "DRIVER"
+                name: f.Name.FullName(),
+                userName: f.Name.FirstName(),
+                password: f.Lorem.Word(),
+                cnpj: new CNPJ(f.Company.Cnpj()),
+                dateOfBirth: f.Date.Past(),
+                cnhNumber: f.Lorem.Word(),
+                cnhType: cnhType,
+                cnhImage: f.Image.Locale,
+                permission: "DRIVER"
             ));
 
         return driver;
     }
-    
+
     public static Driver CreateDriverFakeCNPJInvalid()
     {
         var cnhType = new Faker().PickRandom(ECnhType.AB, ECnhType.B, ECnhType.A);
         var driver = new Faker<Driver>(locale: "pt_BR")
             .CustomInstantiator(f => new Driver(
-                f.Name.FullName(),
-                f.Name.FirstName(),
-                f.Lorem.Word(),
-                new CNPJ(f.Random.Number(15).ToString()),
-                f.Date.Past(),
-                f.Lorem.Word(), 
-                cnhType,
-                f.Image.Locale,
-                "DRIVER"
+                name: f.Name.FullName(),
+                userName: f.Name.FirstName(),
+                password: f.Lorem.Word(),
+                cnpj: new CNPJ(f.Random.Number(15).ToString()),
+                dateOfBirth: f.Date.Past(),
+                cnhNumber: f.Lorem.Word(),
+                cnhType: cnhType,
+                cnhImage: f.Image.Locale,
+                permission: "DRIVER"
             ));
 
         return driver;
     }
-
 }

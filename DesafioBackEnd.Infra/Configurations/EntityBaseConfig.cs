@@ -10,10 +10,11 @@ where TEntity : EntityBase
     public void Configure(EntityTypeBuilder<TEntity> builder)
     {
         ConfigureBase(builder);
+        ConfigureFields(builder);
     }
 
     public abstract void ConfigureFields(EntityTypeBuilder<TEntity> builder);
-    private void ConfigureBase(EntityTypeBuilder<TEntity> builder)
+    public virtual void ConfigureBase(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(c => c.Id);
 

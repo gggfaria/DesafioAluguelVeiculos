@@ -24,8 +24,6 @@ public class PersonConfig : EntityBaseConfig<Person>
         builder.Property(p => p.Password)
             .IsRequired()
             .HasColumnType("varchar");
-        
-
     
     }
 }

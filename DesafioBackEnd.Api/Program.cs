@@ -5,6 +5,7 @@ using DesafioBackEnd.Infra.Context;
 using DesafioBackEnd.Service.Interfaces.People;
 using DesafioBackEnd.Service.Services.People;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,7 +55,9 @@ builder.Services.AddSingleton<InjectionStrings>
         )
 );
 
-builder.Services.AddDbContext<DesafioContext>();
+builder.Services.AddDbContext<DesafioContext>(
+    optoins => optoins.UseNpgsql(builder.Configuration.GetConnectionString("SqlConnection"))
+    );
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

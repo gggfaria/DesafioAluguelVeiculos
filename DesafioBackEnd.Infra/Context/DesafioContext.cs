@@ -1,6 +1,6 @@
-using DesafioBackEnd.Domain.Entities;
 using DesafioBackEnd.Domain.Entities.Motorcycles;
 using DesafioBackEnd.Infra.Configurations.Motorcycles;
+using DesafioBackEnd.Infra.Configurations.People;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,15 +8,8 @@ namespace DesafioBackEnd.Infra.Context;
 
 public class DesafioContext : DbContext
 {
-    private readonly string _connection;
-    public DesafioContext(InjectionStrings connection)
+    public DesafioContext(DbContextOptions<DesafioContext> options) : base(options)
     {
-        _connection = connection.DbConnection;
-    }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql(_connection);
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,8 +21,16 @@ public class DesafioContext : DbContext
 
         modelBuilder.ApplyConfiguration(new MotorcycleConfig());
         modelBuilder.ApplyConfiguration(new PlanConfig());
-
+        modelBuilder.ApplyConfiguration(new PersonConfig());
+        modelBuilder.ApplyConfiguration(new DriverConfig());
+        
         SeedPlans(modelBuilder);
+        
+        foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+        {
+            if (!relationship.IsOwnership) // !VO
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+        }
 
     }
 

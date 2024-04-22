@@ -4,20 +4,25 @@ namespace DesafioBackEnd.Domain.Entities.People;
 
 public abstract class Person : EntityBase
 {
-    public static readonly HashSet<string> PERMISSIONS = new HashSet<string> { "ADMIN", "DRIVER" };
-
-    protected Person(string name, string userName, string password, string type)
+    protected Person(string name, string userName, string password, string permission)
     {
         Name = name;
         UserName = userName;
         Password = password;
-        Type = type;
+        Permission = permission;
     }
+
+    public static readonly HashSet<string> PERMISSIONS = new HashSet<string> { "ADMIN", "DRIVER" };
+
+    protected Person()
+    {
+        
+    }
+    
 
     public string Name { get; protected set; }
     public string UserName { get; set; }
     public string Password { get; set; }
-    public string Type { get; private set; }
     
     private string _permission;
 

@@ -17,4 +17,8 @@
       <ProjectReference Include="..\DesafioBackEnd.Domain\DesafioBackEnd.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>
