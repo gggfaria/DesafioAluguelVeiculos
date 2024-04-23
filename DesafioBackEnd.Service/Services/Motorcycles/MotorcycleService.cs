@@ -35,6 +35,32 @@ public class MotorcycleService : IMotorcycleService
             return ResultServiceFactory.InternalServerError("Created has failed");
         
         return ResultServiceFactory<ViewMotorcycleDto>.Created(_mapper.Map<ViewMotorcycleDto>(moto));
-        
     }
+    
+    public async Task<ResultService> GetByLincence(string licencePlate)
+    {
+        if (string.IsNullOrEmpty(licencePlate))
+            return ResultServiceFactory.BadRequest("Invalid value");
+
+        var moto = await _unitOfWork.Motorcycle.GetByLicencePlate(licencePlate);
+        
+        if(moto is null)
+            return ResultServiceFactory.NotFound("No motorcycle found");
+ 
+        
+        return ResultServiceFactory<ViewMotorcycleDto>.Ok(_mapper.Map<ViewMotorcycleDto>(moto));
+    }
+    
+    public async Task<ResultService> GetAll()
+    {
+        var motorcycles = await _unitOfWork.Motorcycle.FindAsync(p => p.IsActive);
+        
+        if(motorcycles?.Count() < 1)
+            return ResultServiceFactory<IEnumerable<ViewMotorcycleDto>>.NoContent(Enumerable.Empty<ViewMotorcycleDto>(),"No motorcycles found");
+ 
+        
+        return ResultServiceFactory<IEnumerable<ViewMotorcycleDto>>.Ok(_mapper.Map<IEnumerable<ViewMotorcycleDto>>(motorcycles));
+    }
+
+    
 }

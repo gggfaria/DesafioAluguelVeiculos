@@ -28,4 +28,22 @@ public class MotorcycleController : ControllerBase
         
         return StatusCode(result.StatusCode, result);
     }
+    
+    [HttpGet("{licencePlate}")]
+    [ProducesResponseType(typeof(ResultService<ViewMotorcycleDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult> GetByLicence([FromRoute] string licencePlate)
+    {
+        var result = await _motorcycleService.GetByLincence(licencePlate);
+        return StatusCode(result.StatusCode, result);
+    }
+    
+    [HttpGet]
+    [ProducesResponseType(typeof(ResultService<IEnumerable<ViewMotorcycleDto>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultService<IEnumerable<ViewMotorcycleDto>>), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> GetAll()
+    {
+        var result = await _motorcycleService.GetAll();
+        return StatusCode(result.StatusCode, result);
+    }
+    
 }

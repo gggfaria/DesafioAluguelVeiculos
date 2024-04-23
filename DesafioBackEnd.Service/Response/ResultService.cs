@@ -39,7 +39,7 @@ public class ResultService
     #endregion
 }
 
-public class ResultService<TDataReturn> : ResultService where TDataReturn : class
+public class ResultService<TDataReturn> : ResultService 
 {
     public ResultService(TDataReturn data, string message, int statusCode, bool success = false, ICollection<InvalidDataResult> errors = null) 
         : base(message, statusCode, success, errors)
