@@ -22,6 +22,11 @@ public class Motorcycle : EntityBase
     public int Year { get; private set; }
     public string LicencePlate { get; private set; }
 
+    public void UpdateLicence(string licencePlate)
+    {
+        LicencePlate = licencePlate;
+    }
+
     public override bool IsValid()
     {
         var validator = new MotorcycleValidator();

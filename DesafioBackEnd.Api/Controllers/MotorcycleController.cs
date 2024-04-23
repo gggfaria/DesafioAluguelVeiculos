@@ -2,6 +2,7 @@ using DesafioBackEnd.Service.DTOs.Motorcycles;
 using DesafioBackEnd.Service.Interfaces.Motorcycles;
 using DesafioBackEnd.Service.Response;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioBackEnd.Api.Controllers;
@@ -43,6 +44,17 @@ public class MotorcycleController : ControllerBase
     public async Task<ActionResult> GetAll()
     {
         var result = await _motorcycleService.GetAll();
+        return StatusCode(result.StatusCode, result);
+    }
+    
+    [HttpPatch("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResultService), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultService), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> UpdatePlate([FromRoute] Guid id, [FromBody] UpdateLicencePlateDto licence)
+    {
+        var result = await _motorcycleService.UpdateLicencePlate(id, licence.LicencePlate);
+
         return StatusCode(result.StatusCode, result);
     }
     
