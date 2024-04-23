@@ -6,7 +6,7 @@ namespace DesafioBackEnd.Domain.Repositories;
 public interface IRepositoryBase<TEntity>
     where TEntity : EntityBase
 {
-    Task<TEntity> GetAsync(Guid id, bool asNoTracking = true);
+    Task<TEntity?> GetAsync(Guid id, bool asNoTracking = true);
     Task<IEnumerable<TEntity>> GetAllAsync(int skip = 0, int limit = int.MaxValue);
 
     Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> filter);

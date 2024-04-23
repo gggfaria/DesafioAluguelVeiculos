@@ -17,5 +17,15 @@ public class MotorcycleRepository : RepositoryBase<Motorcycle>, IMotorcycleRepos
 
         return await query.SingleOrDefaultAsync(e => e.LicencePlate.Equals(licence));
     }
+    
+    public async Task<Motorcycle?> GetByIdWithRentals(Guid id)
+    {
+        IQueryable<Motorcycle> query =
+            _context.Set<Motorcycle>()
+            .Include(p => p.Rentals)
+            .AsQueryable();
+
+        return await query.SingleOrDefaultAsync(e => e.Id.Equals(id));
+    }
 
 }

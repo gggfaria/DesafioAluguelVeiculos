@@ -22,7 +22,6 @@ builder.Services.AddControllers(
 options =>
 {
     options.OutputFormatters.RemoveType<StringOutputFormatter>();
-    options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
     options.Filters.Add(typeof(CustomExceptionFilter));
     
 }).AddJsonOptions(options =>

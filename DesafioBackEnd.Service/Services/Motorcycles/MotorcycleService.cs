@@ -1,11 +1,9 @@
 using AutoMapper;
-using DesafioBackEnd.Domain.Entities;
 using DesafioBackEnd.Domain.Entities.Motorcycles;
 using DesafioBackEnd.Domain.Repositories;
 using DesafioBackEnd.Service.DTOs.Motorcycles;
 using DesafioBackEnd.Service.Interfaces.Motorcycles;
 using DesafioBackEnd.Service.Response;
-using Microsoft.AspNetCore.JsonPatch;
 
 namespace DesafioBackEnd.Service.Services.Motorcycles;
 
@@ -73,6 +71,9 @@ public class MotorcycleService : IMotorcycleService
 
         Motorcycle motorcycle = await _unitOfWork.Motorcycle.GetAsync(motorcycleId);
 
+        if (motorcycle is null)
+            return ResultServiceFactory.NotFound("No motorcycle found");
+
         motorcycle.UpdateLicence(licencePlate);
 
         _unitOfWork.Motorcycle.Update(motorcycle);
@@ -82,5 +83,23 @@ public class MotorcycleService : IMotorcycleService
             return ResultServiceFactory.InternalServerError("Update has failed");
 
         return ResultServiceFactory.NoContent("Licence updated");
+    }
+    
+    public async Task<ResultService> Delete(Guid motorcycleId)
+    {
+        Motorcycle motorcycle = await _unitOfWork.Motorcycle.GetByIdWithRentals(motorcycleId);
+
+        if (motorcycle is null)
+            return ResultServiceFactory.NotFound("No motorcycle found");
+        if (motorcycle.Rentals?.Count() > 0)
+            return ResultServiceFactory.BadRequest("This motorcycle has rentals");
+
+        _unitOfWork.Motorcycle.Remove(motorcycle);
+        var result = await _unitOfWork.CommitAsync();
+
+        if (!result)
+            return ResultServiceFactory.InternalServerError("Delete has failed");
+
+        return ResultServiceFactory.NoContent("Motorcycle has been deleted");
     }
 }

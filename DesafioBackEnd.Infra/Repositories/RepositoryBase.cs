@@ -16,7 +16,7 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
         _context = context;
     }
 
-    public async Task<TEntity> GetAsync(Guid id, bool asNoTracking)
+    public async Task<TEntity?> GetAsync(Guid id, bool asNoTracking)
     {
         IQueryable<TEntity> query = _context.Set<TEntity>().AsQueryable();
 

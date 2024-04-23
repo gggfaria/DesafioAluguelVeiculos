@@ -58,4 +58,16 @@ public class MotorcycleController : ControllerBase
         return StatusCode(result.StatusCode, result);
     }
     
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResultService), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultService), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Delete([FromRoute] Guid id)
+    {
+        var result = await _motorcycleService.Delete(id);
+
+        return StatusCode(result.StatusCode, result);
+    }
+
+    
 }

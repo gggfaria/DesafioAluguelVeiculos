@@ -9,4 +9,5 @@ public interface IMotorcycleService
     Task<ResultService> GetByLincence(string licencePlate);
     Task<ResultService> GetAll();
     Task<ResultService> UpdateLicencePlate(Guid motorcycleId, string licencePlate);
+    Task<ResultService> Delete(Guid motorcycleId);
 }
