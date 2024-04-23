@@ -49,35 +49,34 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddSingleton<InjectionStrings>
 (
-    _=> new InjectionStrings(
+    _ => new InjectionStrings(
         builder.Configuration.GetSection("jwtTokenKey").Get<string>(),
-              builder.Configuration.GetConnectionString("SqlConnection")
-        )
+        builder.Configuration.GetConnectionString("SqlConnection")
+    )
 );
 
 builder.Services.AddDbContext<DesafioContext>(
     optoins => optoins.UseNpgsql(builder.Configuration.GetConnectionString("SqlConnection"))
-    );
+);
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
 var app = builder.Build();
 
-
-
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var serviceScope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    serviceScope.ServiceProvider.GetService<DesafioContext>().Database.Migrate();
 }
 
-
-
+// Configure the HTTP request pipeline.
+//Validacao do teste
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI();
+// }
 
 
 // EnableSensitiveDataLogging()
