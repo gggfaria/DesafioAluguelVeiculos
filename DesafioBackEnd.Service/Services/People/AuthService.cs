@@ -55,7 +55,7 @@ public class AuthService : IAuthService
                 new Claim("PersonName", user.Name),
                 new Claim(ClaimTypes.Role, user.Permission),
             }),
-            Expires = DateTime.UtcNow.AddMinutes(5),
+            Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using DesafioBackEnd.Domain.Entities;
 
 namespace DesafioBackEnd.Service.Response;
 
@@ -7,7 +8,7 @@ public class ResultService
     #region Ctor
 
     public ResultService(string message, int statusCode, bool success = false,
-        ICollection<string> errors = null)
+        ICollection<InvalidDataResult> errors = null)
     {
         Message = message;
         StatusCode = statusCode;
@@ -33,14 +34,14 @@ public class ResultService
     public bool HasFailed { get; protected set; }
 
     [JsonPropertyName("errors")] 
-    public ICollection<string> Errors { get; protected set; }
+    public ICollection<InvalidDataResult> Errors { get; protected set; }
 
     #endregion
 }
 
 public class ResultService<TDataReturn> : ResultService where TDataReturn : class
 {
-    public ResultService(TDataReturn data, string message, int statusCode, bool success = false, ICollection<string> errors = null) 
+    public ResultService(TDataReturn data, string message, int statusCode, bool success = false, ICollection<InvalidDataResult> errors = null) 
         : base(message, statusCode, success, errors)
     {
         Data = data;

@@ -1,4 +1,5 @@
 using DesafioBackEnd.Domain.Entities.Extensions;
+using DesafioBackEnd.Domain.Entities.Motorcycles;
 using DesafioBackEnd.Domain.Entities.ValueObjects;
 using DesafioBackEnd.Domain.Enums;
 using DesafioBackEnd.Domain.Validators.People;
@@ -22,6 +23,8 @@ public class Driver : Person
         CnhNumber = cnhNumber;
         CnhType = cnhType;
         CnhImage = cnhImage;
+
+        Rentals = new List<Rental>();
     }
 
     public CNPJ Cnpj { get; private set; }
@@ -29,6 +32,9 @@ public class Driver : Person
     public string CnhNumber { get; private set; }
     public ECnhType CnhType { get; private set; }
     public string CnhImage { get; private set; }
+
+
+    public ICollection<Rental> Rentals { get; private set; }
 
     public bool HasCnhTypeA()
     {

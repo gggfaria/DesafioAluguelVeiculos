@@ -23,5 +23,8 @@ public class MotorcycleConfig : EntityBaseConfig<Motorcycle>
         
         builder.HasIndex(p => p.LicencePlate)
             .IsUnique();
+        
+        builder.HasMany(p => p.Rentals);
+
     }
 }

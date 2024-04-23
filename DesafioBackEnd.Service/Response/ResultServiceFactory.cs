@@ -1,4 +1,5 @@
 using System.Net;
+using DesafioBackEnd.Domain.Entities;
 
 namespace DesafioBackEnd.Service.Response;
 
@@ -37,11 +38,11 @@ public static class ResultServiceFactory
         return new ResultService(
             message,
             (int)HttpStatusCode.BadRequest,
-            errors: new List<string>()
+            errors: null
         );
     }
 
-    public static ResultService BadRequest(ICollection<string> errors, string message)
+    public static ResultService BadRequest(ICollection<InvalidDataResult> errors, string message)
     {
         return new ResultService(
             message,
@@ -89,7 +90,7 @@ public static class ResultServiceFactory<TResult> where TResult : class
     }
 
 
-    public static ResultService<TResult> Created(TResult data, string message)
+    public static ResultService<TResult> Created(TResult data, string message = null)
     {
         return new ResultService<TResult>(
             statusCode: (int)HttpStatusCode.Created,

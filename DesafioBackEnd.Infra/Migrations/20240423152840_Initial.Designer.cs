@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioBackEnd.Infra.Migrations
 {
     [DbContext(typeof(DesafioContext))]
-    [Migration("20240422175542_Initial")]
+    [Migration("20240423152840_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 22, 17, 55, 42, 51, DateTimeKind.Utc).AddTicks(5330));
+                        .HasDefaultValue(new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(3670));
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -68,7 +68,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 22, 17, 55, 42, 51, DateTimeKind.Utc).AddTicks(8510));
+                        .HasDefaultValue(new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(4560));
 
                     b.Property<int>("Days")
                         .HasColumnType("integer");
@@ -88,7 +88,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("050757df-99dc-4318-86e2-20a13b8bc710"),
+                            Id = new Guid("e190db2a-e827-407f-812e-29daa7f9ea0e"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 7,
                             IsActive = true,
@@ -96,7 +96,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6df66017-d27d-493f-9f6e-47c10824762c"),
+                            Id = new Guid("1a936486-3255-40d9-b3b7-57a1fcdc032b"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 15,
                             IsActive = true,
@@ -104,7 +104,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2ba8fc6c-3fc1-4d49-995c-e627ebe122f9"),
+                            Id = new Guid("21937039-153d-49f9-b18b-06f44e3364d1"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 30,
                             IsActive = true,
@@ -112,7 +112,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a658b19b-98c8-4513-be13-5d7a2b2be96d"),
+                            Id = new Guid("e36a8312-0984-43e5-bd2e-a8ce25a26be7"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 45,
                             IsActive = true,
@@ -120,12 +120,57 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a97f8661-edc2-47ce-8d33-61e401c89311"),
+                            Id = new Guid("527fbb56-913b-4cf8-9700-1befe3d196d8"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 50,
                             IsActive = true,
                             Price = 30m
                         });
+                });
+
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.Motorcycles.Rental", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValue(new DateTime(2024, 4, 23, 15, 28, 40, 853, DateTimeKind.Utc).AddTicks(3530));
+
+                    b.Property<Guid>("DriverId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateOnly>("EstimatedDate")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("MotorcycleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PlanId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("IsActive");
+
+                    b.HasIndex("MotorcycleId");
+
+                    b.HasIndex("PlanId");
+
+                    b.ToTable("rental", (string)null);
                 });
 
             modelBuilder.Entity("DesafioBackEnd.Domain.Entities.People.Person", b =>
@@ -137,7 +182,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 22, 17, 55, 42, 52, DateTimeKind.Utc).AddTicks(2150));
+                        .HasDefaultValue(new DateTime(2024, 4, 23, 15, 28, 40, 852, DateTimeKind.Utc).AddTicks(8120));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -174,6 +219,25 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Person");
                 });
 
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.People.Admin", b =>
+                {
+                    b.HasBaseType("DesafioBackEnd.Domain.Entities.People.Person");
+
+                    b.HasDiscriminator().HasValue("Admin");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("44d06df4-9840-4cd6-a27b-e538c7fdb512"),
+                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            Name = "Galdalf",
+                            Password = "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=",
+                            Permission = "ADMIN",
+                            UserName = "mithrandir"
+                        });
+                });
+
             modelBuilder.Entity("DesafioBackEnd.Domain.Entities.People.Driver", b =>
                 {
                     b.HasBaseType("DesafioBackEnd.Domain.Entities.People.Person");
@@ -193,6 +257,33 @@ namespace DesafioBackEnd.Infra.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasDiscriminator().HasValue("Driver");
+                });
+
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.Motorcycles.Rental", b =>
+                {
+                    b.HasOne("DesafioBackEnd.Domain.Entities.People.Driver", "Driver")
+                        .WithMany("Rentals")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DesafioBackEnd.Domain.Entities.Motorcycles.Motorcycle", "Motorcycle")
+                        .WithMany("Rentals")
+                        .HasForeignKey("MotorcycleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DesafioBackEnd.Domain.Entities.Motorcycles.Plan", "Plan")
+                        .WithMany("Rentals")
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Motorcycle");
+
+                    b.Navigation("Plan");
                 });
 
             modelBuilder.Entity("DesafioBackEnd.Domain.Entities.People.Driver", b =>
@@ -216,6 +307,21 @@ namespace DesafioBackEnd.Infra.Migrations
 
                     b.Navigation("Cnpj")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.Motorcycles.Motorcycle", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.Motorcycles.Plan", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("DesafioBackEnd.Domain.Entities.People.Driver", b =>
+                {
+                    b.Navigation("Rentals");
                 });
 #pragma warning restore 612, 618
         }

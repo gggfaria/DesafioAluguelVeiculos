@@ -11,5 +11,18 @@ public static class ValidationExtension
             validationResult.Errors.Add(error);
         }
     }
+    
+    public static ICollection<InvalidDataResult> GetErrorsResult(this ValidationResult validationResult)
+    {
+        var errorsResult = new List<InvalidDataResult>();
+
+        foreach (var error in validationResult.Errors)
+        {
+            errorsResult.Add(new InvalidDataResult(error.PropertyName, error.ErrorMessage));
+        }
+
+        return errorsResult;
+    }
+
 
 }

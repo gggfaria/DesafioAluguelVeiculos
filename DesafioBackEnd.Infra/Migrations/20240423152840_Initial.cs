@@ -17,7 +17,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     Model = table.Column<string>(type: "varchar", nullable: false),
                     Year = table.Column<int>(type: "integer", nullable: false),
                     LicencePlate = table.Column<string>(type: "varchar(20)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 22, 17, 55, 42, 51, DateTimeKind.Utc).AddTicks(5330)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(3670)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -40,7 +40,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     CnhNumber = table.Column<string>(type: "varchar(20)", nullable: true),
                     CnhType = table.Column<int>(type: "integer", nullable: true),
                     CnhImage = table.Column<string>(type: "varchar", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 22, 17, 55, 42, 52, DateTimeKind.Utc).AddTicks(2150)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 852, DateTimeKind.Utc).AddTicks(8120)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -55,7 +55,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Days = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 22, 17, 55, 42, 51, DateTimeKind.Utc).AddTicks(8510)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(4560)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -63,16 +63,58 @@ namespace DesafioBackEnd.Infra.Migrations
                     table.PrimaryKey("PK_plans", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "rental",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    MotorcycleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlanId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DriverId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EstimatedDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 853, DateTimeKind.Utc).AddTicks(3530)),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rental", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_rental_motorcycles_MotorcycleId",
+                        column: x => x.MotorcycleId,
+                        principalTable: "motorcycles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_rental_people_DriverId",
+                        column: x => x.DriverId,
+                        principalTable: "people",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_rental_plans_PlanId",
+                        column: x => x.PlanId,
+                        principalTable: "plans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "people",
+                columns: new[] { "Id", "Discriminator", "IsActive", "Name", "Password", "Permission", "UserName" },
+                values: new object[] { new Guid("44d06df4-9840-4cd6-a27b-e538c7fdb512"), "Admin", true, "Galdalf", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=", "ADMIN", "mithrandir" });
+
             migrationBuilder.InsertData(
                 table: "plans",
                 columns: new[] { "Id", "Days", "IsActive", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("050757df-99dc-4318-86e2-20a13b8bc710"), 7, true, 30m },
-                    { new Guid("2ba8fc6c-3fc1-4d49-995c-e627ebe122f9"), 30, true, 30m },
-                    { new Guid("6df66017-d27d-493f-9f6e-47c10824762c"), 15, true, 30m },
-                    { new Guid("a658b19b-98c8-4513-be13-5d7a2b2be96d"), 45, true, 30m },
-                    { new Guid("a97f8661-edc2-47ce-8d33-61e401c89311"), 50, true, 30m }
+                    { new Guid("1a936486-3255-40d9-b3b7-57a1fcdc032b"), 15, true, 30m },
+                    { new Guid("21937039-153d-49f9-b18b-06f44e3364d1"), 30, true, 30m },
+                    { new Guid("527fbb56-913b-4cf8-9700-1befe3d196d8"), 50, true, 30m },
+                    { new Guid("e190db2a-e827-407f-812e-29daa7f9ea0e"), 7, true, 30m },
+                    { new Guid("e36a8312-0984-43e5-bd2e-a8ce25a26be7"), 45, true, 30m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -101,10 +143,33 @@ namespace DesafioBackEnd.Infra.Migrations
                 name: "IX_plans_IsActive",
                 table: "plans",
                 column: "IsActive");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rental_DriverId",
+                table: "rental",
+                column: "DriverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rental_IsActive",
+                table: "rental",
+                column: "IsActive");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rental_MotorcycleId",
+                table: "rental",
+                column: "MotorcycleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rental_PlanId",
+                table: "rental",
+                column: "PlanId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "rental");
+
             migrationBuilder.DropTable(
                 name: "motorcycles");
 

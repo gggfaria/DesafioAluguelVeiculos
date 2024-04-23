@@ -1,3 +1,4 @@
+using DesafioBackEnd.Domain.Entities.Extensions;
 using FluentValidation.Results;
 
 namespace DesafioBackEnd.Domain.Entities;
@@ -18,6 +19,11 @@ public abstract class EntityBase
     public ValidationResult ValidationResultData { get; protected set; }
     
     public abstract bool IsValid();
+    
+    public ICollection<InvalidDataResult> GetInvalidData()
+    {
+        return ValidationResultData.GetErrorsResult();
+    }
     
     public virtual void Active()
     {

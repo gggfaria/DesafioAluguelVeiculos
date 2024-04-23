@@ -1,4 +1,5 @@
 using DesafioBackEnd.Domain.Entities.Motorcycles;
+using DesafioBackEnd.Domain.Entities.People;
 using DesafioBackEnd.Infra.Configurations.Motorcycles;
 using DesafioBackEnd.Infra.Configurations.People;
 using FluentValidation.Results;
@@ -23,8 +24,13 @@ public class DesafioContext : DbContext
         modelBuilder.ApplyConfiguration(new PlanConfig());
         modelBuilder.ApplyConfiguration(new PersonConfig());
         modelBuilder.ApplyConfiguration(new DriverConfig());
+        modelBuilder.ApplyConfiguration(new RentalConfig());
+        modelBuilder.ApplyConfiguration(new AdminConfig());
+
+        
         
         SeedPlans(modelBuilder);
+        SeedAdmin(modelBuilder);
         
         foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
         {
@@ -42,6 +48,14 @@ public class DesafioContext : DbContext
             new Plan(30, 30),
             new Plan(45, 30),
             new Plan(50, 30)
+        );
+    }
+    
+    private static void SeedAdmin(ModelBuilder modelBuilder)
+    {
+        //mellon_42
+        modelBuilder.Entity<Admin>().HasData(
+            new Admin("Galdalf","mithrandir", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=","ADMIN" )
         );
     }
 }

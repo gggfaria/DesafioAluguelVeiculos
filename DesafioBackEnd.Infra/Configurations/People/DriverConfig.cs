@@ -26,9 +26,13 @@ public class DriverConfig : EntityBaseConfig<Driver>
             .Property(p => p.Number)
             .HasColumnType("varchar(20)")
             .IsRequired();
+        
+        builder.HasMany(p => p.Rentals);
+
     }
 
     public override void ConfigureBase(EntityTypeBuilder<Driver> builder)
     {
+        //Entity base person
     }
 }
