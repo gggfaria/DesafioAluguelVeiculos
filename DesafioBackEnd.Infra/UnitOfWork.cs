@@ -9,10 +9,13 @@ namespace DesafioBackEnd.Infra;
 
 public class UnitOfWork : IUnitOfWork
 {
-    protected readonly DesafioContext _context;
+    private DesafioContext _context;
     private IMotorcycleRepository _motorcycleRepository;
     private IPersonRepository _personRepository;
     private IDriverRepository _driverRepository;
+    private IRentalRepository _rentalRepository;
+    private IPlanRepository _planRepository;
+
 
     public UnitOfWork(DesafioContext context)
     {
@@ -24,9 +27,19 @@ public class UnitOfWork : IUnitOfWork
         get { return _motorcycleRepository ??= new MotorcycleRepository(_context); }
     }
 
-    public IDriverRepository Driver 
-    {  
-        get { return _driverRepository ??= new DriverRepository(_context); } 
+    public IDriverRepository Driver
+    {
+        get { return _driverRepository ??= new DriverRepository(_context); }
+    }
+
+    public IRentalRepository Rental
+    {
+        get { return _rentalRepository ??= new RentalRepository(_context); }
+    }
+
+    public IPlanRepository Plan
+    {
+        get { return _planRepository ??= new PlanRepository(_context); }
     }
 
     public IPersonRepository Person
@@ -37,7 +50,7 @@ public class UnitOfWork : IUnitOfWork
 
     public bool Commit() => _context.SaveChanges() > 0;
 
-    public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;      
+    public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
 
     public void Dispose()
     {

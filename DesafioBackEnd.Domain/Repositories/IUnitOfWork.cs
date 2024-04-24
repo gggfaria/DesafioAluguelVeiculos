@@ -11,5 +11,8 @@ public interface IUnitOfWork : IDisposable
     IPersonRepository Person { get;  }
     IMotorcycleRepository Motorcycle { get;  }
     IDriverRepository Driver { get;  }
+    IRentalRepository Rental { get;  }
+    IPlanRepository Plan { get;  }
+
     
 }

@@ -79,6 +79,7 @@ builder.Services.AddDbContext<DesafioContext>(
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMotorcycleService, MotorcycleService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IRentalService, RentalService>();
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
