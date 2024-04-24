@@ -12,6 +12,7 @@ public class UnitOfWork : IUnitOfWork
     protected readonly DesafioContext _context;
     private IMotorcycleRepository _motorcycleRepository;
     private IPersonRepository _personRepository;
+    private IDriverRepository _driverRepository;
 
     public UnitOfWork(DesafioContext context)
     {
@@ -22,7 +23,12 @@ public class UnitOfWork : IUnitOfWork
     {
         get { return _motorcycleRepository ??= new MotorcycleRepository(_context); }
     }
-    
+
+    public IDriverRepository Driver 
+    {  
+        get { return _driverRepository ??= new DriverRepository(_context); } 
+    }
+
     public IPersonRepository Person
     {
         get { return _personRepository ??= new PersonRepository(_context); }

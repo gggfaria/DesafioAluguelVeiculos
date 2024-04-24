@@ -10,4 +10,6 @@ public interface IUnitOfWork : IDisposable
 
     IPersonRepository Person { get;  }
     IMotorcycleRepository Motorcycle { get;  }
+    IDriverRepository Driver { get;  }
+    
 }

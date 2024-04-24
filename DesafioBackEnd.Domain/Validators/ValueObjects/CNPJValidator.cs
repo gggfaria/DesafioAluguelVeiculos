@@ -8,9 +8,8 @@ public class CNPJValidator : AbstractValidator<CNPJ>
     public CNPJValidator()
     {
         RuleFor(c => c.Number)
-            .Must(c => IsValidNumber(c))
-            .When(c => !string.IsNullOrWhiteSpace(c.Number))
-            .WithMessage("CNPJ invalid");
+            .Must(IsValidNumber)
+            .OverridePropertyName("CNPJ");
     }
 
     private bool IsValidNumber(string numero)

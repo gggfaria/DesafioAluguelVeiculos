@@ -17,7 +17,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     Model = table.Column<string>(type: "varchar", nullable: false),
                     Year = table.Column<int>(type: "integer", nullable: false),
                     LicencePlate = table.Column<string>(type: "varchar(20)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(3670)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 24, 0, 13, 48, 769, DateTimeKind.Utc).AddTicks(7410)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -40,7 +40,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     CnhNumber = table.Column<string>(type: "varchar(20)", nullable: true),
                     CnhType = table.Column<int>(type: "integer", nullable: true),
                     CnhImage = table.Column<string>(type: "varchar", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 852, DateTimeKind.Utc).AddTicks(8120)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 24, 0, 13, 48, 771, DateTimeKind.Utc).AddTicks(2110)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -55,7 +55,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Days = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 851, DateTimeKind.Utc).AddTicks(4560)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 24, 0, 13, 48, 769, DateTimeKind.Utc).AddTicks(8340)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -74,7 +74,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     StartDate = table.Column<DateOnly>(type: "date", nullable: false),
                     EstimatedDate = table.Column<DateOnly>(type: "date", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 23, 15, 28, 40, 853, DateTimeKind.Utc).AddTicks(3530)),
+                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 4, 24, 0, 13, 48, 771, DateTimeKind.Utc).AddTicks(7720)),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -103,18 +103,18 @@ namespace DesafioBackEnd.Infra.Migrations
             migrationBuilder.InsertData(
                 table: "people",
                 columns: new[] { "Id", "Discriminator", "IsActive", "Name", "Password", "Permission", "UserName" },
-                values: new object[] { new Guid("44d06df4-9840-4cd6-a27b-e538c7fdb512"), "Admin", true, "Galdalf", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=", "ADMIN", "mithrandir" });
+                values: new object[] { new Guid("150055ad-6107-4e89-a2df-8956ec294915"), "Admin", true, "Galdalf", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=", "ADMIN", "mithrandir" });
 
             migrationBuilder.InsertData(
                 table: "plans",
                 columns: new[] { "Id", "Days", "IsActive", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("1a936486-3255-40d9-b3b7-57a1fcdc032b"), 15, true, 30m },
-                    { new Guid("21937039-153d-49f9-b18b-06f44e3364d1"), 30, true, 30m },
-                    { new Guid("527fbb56-913b-4cf8-9700-1befe3d196d8"), 50, true, 30m },
-                    { new Guid("e190db2a-e827-407f-812e-29daa7f9ea0e"), 7, true, 30m },
-                    { new Guid("e36a8312-0984-43e5-bd2e-a8ce25a26be7"), 45, true, 30m }
+                    { new Guid("1f84231e-67df-4a2a-ba79-7b600c3add04"), 45, true, 30m },
+                    { new Guid("66364855-b556-48b3-a25c-b92a9d8377dd"), 30, true, 30m },
+                    { new Guid("97cbdd38-e1ce-4972-b6b7-ab2fb2b2c651"), 15, true, 30m },
+                    { new Guid("a68ebbfa-1b53-49d6-b06d-5c59c79b4eca"), 7, true, 30m },
+                    { new Guid("b10babbb-437d-409d-b109-9756c1bb59a9"), 50, true, 30m }
                 });
 
             migrationBuilder.CreateIndex(

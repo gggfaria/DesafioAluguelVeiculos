@@ -14,6 +14,8 @@ public class PersonValidator : AbstractValidator<Person>
             .NotEmpty();
         RuleFor(p => p.Password)
             .NotEmpty();
+        RuleFor(p => p.Permission)
+            .NotEmpty();
         
     }
     

@@ -55,7 +55,7 @@ public class DesafioContext : DbContext
     {
         //mellon_42
         modelBuilder.Entity<Admin>().HasData(
-            new Admin("Galdalf","mithrandir", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=","ADMIN" )
+            new Admin("Galdalf","mithrandir", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=")
         );
     }
 }

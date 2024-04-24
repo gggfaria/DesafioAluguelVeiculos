@@ -78,6 +78,8 @@ builder.Services.AddDbContext<DesafioContext>(
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMotorcycleService, MotorcycleService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -105,10 +107,10 @@ builder.Services.AddAuthentication(x =>
 
 var app = builder.Build();
 
-using (var serviceScope = app.Services.CreateScope())
-{
-    serviceScope.ServiceProvider.GetService<DesafioContext>().Database.Migrate();
-}
+using var serviceScope = app.Services.CreateScope();
+serviceScope.ServiceProvider.GetService<DesafioContext>().Database.Migrate();
+
+
 
 // Configure the HTTP request pipeline.
 //Validacao do teste

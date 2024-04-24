@@ -20,8 +20,7 @@ public static class FakerTest
                 dateOfBirth: f.Date.Past(),
                 cnhNumber: f.Lorem.Word(),
                 cnhType: cnhType,
-                cnhImage: f.Image.Locale,
-                permission: "DRIVER"
+                cnhImage: f.Image.Locale
             ));
 
         return driver;
@@ -39,8 +38,7 @@ public static class FakerTest
                 dateOfBirth: f.Date.Past(),
                 cnhNumber: f.Lorem.Word(),
                 cnhType: cnhType,
-                cnhImage: f.Image.Locale,
-                permission: "DRIVER"
+                cnhImage: f.Image.Locale
             ));
 
         return driver;

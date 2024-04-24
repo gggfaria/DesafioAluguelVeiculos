@@ -9,20 +9,20 @@ namespace DesafioBackEnd.Domain.Entities.People;
 
 public class Driver : Person
 {
-
     protected Driver()
     {
-        
     }
-    
-    public Driver(string name, string userName, string password, string permission, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber, ECnhType cnhType, string cnhImage) :
-        base(name, userName, password, permission)
+
+    public Driver(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber,
+        ECnhType cnhType, string cnhImage) :
+        base(name, userName, password)
     {
         Cnpj = cnpj;
         DateOfBirth = dateOfBirth;
         CnhNumber = cnhNumber;
         CnhType = cnhType;
         CnhImage = cnhImage;
+        Permission = "DRIVER";
 
         Rentals = new List<Rental>();
     }
@@ -46,18 +46,24 @@ public class Driver : Person
     {
         base.IsValid();
 
+        ValidateCnpj();
+        
         var deliverymanValidator = new DriverValidator();
-        var cnpjValidator = new CNPJValidator();
 
         var resultDeliverymanValidator = deliverymanValidator.Validate(this);
-        var resultcnpjValidator = cnpjValidator.Validate(Cnpj);
 
         if (!resultDeliverymanValidator.IsValid)
             ValidationResultData.AddErrors(resultDeliverymanValidator);
-        if (!resultcnpjValidator.IsValid)
-            ValidationResultData.AddErrors(resultcnpjValidator);
 
 
         return ValidationResultData.IsValid;
+    }
+
+    private void ValidateCnpj()
+    {
+        if (Cnpj.IsValid()) 
+            return;
+        
+        ValidationResultData.AddErrors(Cnpj.ValidationResultData);
     }
 }
