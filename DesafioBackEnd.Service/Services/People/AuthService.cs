@@ -30,19 +30,18 @@ public class AuthService : IAuthService
         if (!await IsValidLogin(login, user))
             return ResultServiceFactory.Unauthorized(message: "User or password is invalid");
         
-        var token = await CreateToken(login, user);
+        var token = await CreateToken(user);
         
         return ResultServiceFactory<string>.Ok(token, message: "Token created with success");
 
     }
     
-
-    private async Task<bool> IsValidLogin(LoginDto login,  Person user)
+    protected async Task<bool> IsValidLogin(LoginDto login,  Person user)
     {
-        return user?.Password == login.Password.CreateHash();
+        return user?.Password.CreateHash() == login.Password.CreateHash();
     }
 
-    private async Task<string> CreateToken(LoginDto loginDTO, Person user)
+    protected async Task<string> CreateToken(Person user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_chaveJwt);
@@ -51,6 +50,7 @@ public class AuthService : IAuthService
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
+                new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim("PersonName", user.Name),
                 new Claim(ClaimTypes.Role, user.Permission),
@@ -63,4 +63,5 @@ public class AuthService : IAuthService
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+    
 }

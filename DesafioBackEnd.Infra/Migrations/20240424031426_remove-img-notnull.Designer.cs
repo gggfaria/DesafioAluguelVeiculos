@@ -3,6 +3,7 @@ using System;
 using DesafioBackEnd.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioBackEnd.Infra.Migrations
 {
     [DbContext(typeof(DesafioContext))]
-    partial class DesafioContextModelSnapshot : ModelSnapshot
+    [Migration("20240424031426_remove-img-notnull")]
+    partial class removeimgnotnull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 169, DateTimeKind.Utc).AddTicks(7630));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 3, 14, 26, 94, DateTimeKind.Utc).AddTicks(8450));
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -66,7 +68,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 169, DateTimeKind.Utc).AddTicks(8610));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 3, 14, 26, 94, DateTimeKind.Utc).AddTicks(9680));
 
                     b.Property<int>("Days")
                         .HasColumnType("integer");
@@ -86,7 +88,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21afe4af-6f24-4bad-bded-42c09bdd0991"),
+                            Id = new Guid("b9edab01-daee-4655-b50e-f394a0c8d38c"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 7,
                             IsActive = true,
@@ -94,7 +96,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3854c080-19e7-4954-a925-291edda0dfd4"),
+                            Id = new Guid("6be2c9b5-779e-4e9c-a677-ded226a27b93"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 15,
                             IsActive = true,
@@ -102,7 +104,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f86a3af0-6bab-4d9b-b2b5-ac14682c5257"),
+                            Id = new Guid("740e2c28-0693-4366-8e0d-56eaa55dcd5d"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 30,
                             IsActive = true,
@@ -110,7 +112,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d0dca5f3-bcb6-47e7-85ad-40da8099d741"),
+                            Id = new Guid("860f6314-0b56-4157-aee5-51fd7f353663"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 45,
                             IsActive = true,
@@ -118,7 +120,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("66fce299-ad1d-476c-a28f-c75ff62b6c49"),
+                            Id = new Guid("bf005aa3-37c0-4561-b665-5bc21262ca92"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 50,
                             IsActive = true,
@@ -135,7 +137,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 171, DateTimeKind.Utc).AddTicks(9490));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 3, 14, 26, 98, DateTimeKind.Utc).AddTicks(5690));
 
                     b.Property<Guid>("DriverId")
                         .HasColumnType("uuid");
@@ -180,7 +182,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 171, DateTimeKind.Utc).AddTicks(3380));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 3, 14, 26, 97, DateTimeKind.Utc).AddTicks(4130));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -226,7 +228,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("502e6b00-e8f3-491b-882b-8e8827a172f0"),
+                            Id = new Guid("a56286f1-118f-4903-a2a7-80f364206e91"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             Name = "Galdalf",
@@ -252,12 +254,6 @@ namespace DesafioBackEnd.Infra.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<long?>("ImageSize")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ImageType")
-                        .HasColumnType("varchar(10)");
 
                     b.HasDiscriminator().HasValue("Driver");
                 });

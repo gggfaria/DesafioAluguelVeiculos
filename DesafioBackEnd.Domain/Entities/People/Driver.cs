@@ -3,7 +3,6 @@ using DesafioBackEnd.Domain.Entities.Motorcycles;
 using DesafioBackEnd.Domain.Entities.ValueObjects;
 using DesafioBackEnd.Domain.Enums;
 using DesafioBackEnd.Domain.Validators.People;
-using DesafioBackEnd.Domain.Validators.ValueObjects;
 
 namespace DesafioBackEnd.Domain.Entities.People;
 
@@ -11,6 +10,8 @@ public class Driver : Person
 {
     protected Driver()
     {
+        Permission = "DRIVER";
+
     }
 
     public Driver(string name, string userName, string password, CNPJ cnpj, DateTime dateOfBirth, string cnhNumber,
@@ -31,7 +32,12 @@ public class Driver : Person
     public DateTime DateOfBirth { get; private set; }
     public string CnhNumber { get; private set; }
     public ECnhType CnhType { get; private set; }
-    public string CnhImage { get; private set; }
+    public string? CnhImage { get; private set; }   
+    public long? ImageSize { get; private set; }
+    public string? ImageType { get; private set; }
+    
+    public const int MAX_SIZE_IMG_BYTES = 10 * 1024 * 1024;
+    public static readonly string[] ALLOWED_TYPES_IMG = { "image/png", "image/bmp" };
 
 
     public ICollection<Rental> Rentals { get; private set; }
@@ -39,6 +45,18 @@ public class Driver : Person
     public bool HasCnhTypeA()
     {
         return CnhType is ECnhType.A or ECnhType.AB;
+    }
+
+    public void SetImageUrl(string url)
+    {
+        CnhImage = url;
+    }
+
+    public void SetImageInfo(string url, string type, long size)
+    {
+        CnhImage = url;
+        ImageType = type;
+        ImageSize = size;
     }
 
 

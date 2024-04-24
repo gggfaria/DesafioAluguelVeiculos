@@ -9,9 +9,16 @@ public class DriverConfig : EntityBaseConfig<Driver>
     public override void ConfigureFields(EntityTypeBuilder<Driver> builder)
     {
         builder.Property(p => p.CnhImage)
-            .IsRequired()
+            .IsRequired(false)
             .HasColumnType($"varchar");
+        
+        builder.Property(p => p.ImageType)
+            .IsRequired(false)
+            .HasColumnType($"varchar(10)");
 
+        builder.Property(p => p.ImageSize)
+            .IsRequired(false);
+        
         builder.Property(p => p.CnhType)
             .IsRequired();
 

@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using DesafioBackEnd.Api.Filters;
 using DesafioBackEnd.Domain.Entities;
@@ -73,7 +74,11 @@ builder.Services.AddSingleton<InjectionStrings>
 );
 
 builder.Services.AddDbContext<DesafioContext>(
-    optoins => optoins.UseNpgsql(builder.Configuration.GetConnectionString("SqlConnection"))
+    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("SqlConnection"))
+#if DEBUG
+        .EnableSensitiveDataLogging()
+        .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
+#endif
 );
 
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -82,7 +87,9 @@ builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IRentalService, RentalService>();
 
 
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -97,7 +104,7 @@ builder.Services.AddAuthentication(x =>
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtKey)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
         ValidateIssuer = false,
         ValidateAudience = false,
         RequireExpirationTime = true

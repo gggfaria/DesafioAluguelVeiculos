@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using DesafioBackEnd.Domain.Enums;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioBackEnd.Service.DTOs.People;
 
@@ -26,8 +28,4 @@ public class CreateDriverDto
     [Required]
     public ECnhType CnhType { get;  set; }
     
-    [Required]
-    public string CnhImage { get;  set; }
-    
-
 }

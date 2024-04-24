@@ -1,4 +1,6 @@
-﻿services:
+﻿version: "3.8"
+
+services:
   postgres:
     container_name: 'postgres'
     image: postgres
@@ -10,14 +12,13 @@
       - 5432:5432
     networks:
       - desafiobackend-network
-        
-        
+
+
   desafiobackend.web:
     image: desafiobackend.web
     build:
       context: .
       dockerfile: DesafioBackEnd.Api/Dockerfile
-#      target: migrations
     ports:
       - "80:80"
     environment:
@@ -26,7 +27,35 @@
       - postgres
     networks:
       - desafiobackend-network
-      
+        
+        
+#
+#  localstack:
+#    image: localstack/localstack
+#    ports:
+#      - "4567:4566"
+#    networks:
+#      - desafiobackend-network
+#
+#  aws-cli:
+#    image: amazon/aws-cli
+#    depends_on:
+#      - localstack
+#    environment:
+#      - AWS_ACCESS_KEY_ID=test
+#      - AWS_SECRET_ACCESS_KEY=test
+#      - AWS_REGION=us-east-1
+#    entrypoint: /bin/sh -c
+#    command: >
+#      "
+#        aws --endpoint-url=http://localstack:4566/ s3 mb s3://bucket
+#      "
+#    networks:
+#      - desafiobackend-network
+
 networks:
   desafiobackend-network:
-    driver: bridge  
+    driver: bridge
+
+    
+

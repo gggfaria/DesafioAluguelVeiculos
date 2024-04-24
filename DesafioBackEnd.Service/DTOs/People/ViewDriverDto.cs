@@ -11,13 +11,15 @@ public class ViewDriverDto
     public DateTime CreationDate { get; set; }
     
     public bool IsActive { get; set; }
-    public string Cnpj { get; private set; }
+    public string Cnpj { get;  set; }
 
-    public DateTime DateOfBirth { get; private set; }
+    public DateTime DateOfBirth { get;  set; }
 
-    public string CnhNumber { get; private set; }
+    public string CnhNumber { get;  set; }
 
-    public ECnhType CnhType { get; private set; }
+    public ECnhType CnhType { get;  set; }
 
-    public string CnhImage { get; private set; }
+    public string CnhImage { get;  set; }
+
+    public string TokenJwt { get; set; }
 }

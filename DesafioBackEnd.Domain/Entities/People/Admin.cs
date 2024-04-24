@@ -9,5 +9,6 @@ public class Admin : Person
 
     protected Admin()
     {
+        Permission = "ADMIN";
     }
 }

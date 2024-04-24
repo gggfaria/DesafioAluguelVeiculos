@@ -14,6 +14,14 @@ public class ProfilePeople : Profile
                 dest => dest.Cnpj,
                 opt => opt.MapFrom(src => new CNPJ(src.Cnpj))
             );
+            // .ForMember(
+            //     dest => dest.ImageType,
+            //     opt => opt.MapFrom(src => src.Image.ContentType)
+            //     )
+            // .ForMember(
+            //     dest => dest.ImageSize,
+            //     opt => opt.MapFrom(src => src.Image.Length)
+            // );
         
         CreateMap<Driver, ViewDriverDto>()
             .ForMember(
