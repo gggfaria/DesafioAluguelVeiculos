@@ -31,7 +31,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 169, DateTimeKind.Utc).AddTicks(7630));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 22, 55, 43, 764, DateTimeKind.Utc).AddTicks(180));
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -66,7 +66,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 169, DateTimeKind.Utc).AddTicks(8610));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 22, 55, 43, 764, DateTimeKind.Utc).AddTicks(1160));
 
                     b.Property<int>("Days")
                         .HasColumnType("integer");
@@ -86,7 +86,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21afe4af-6f24-4bad-bded-42c09bdd0991"),
+                            Id = new Guid("bdd124ab-ec00-4fcb-a995-6c1125b57609"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 7,
                             IsActive = true,
@@ -94,7 +94,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3854c080-19e7-4954-a925-291edda0dfd4"),
+                            Id = new Guid("504002c4-da0a-4d65-bb3a-6228641d8fe2"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 15,
                             IsActive = true,
@@ -102,7 +102,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f86a3af0-6bab-4d9b-b2b5-ac14682c5257"),
+                            Id = new Guid("7d23463e-b613-4721-928c-5411711b25c3"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 30,
                             IsActive = true,
@@ -110,7 +110,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d0dca5f3-bcb6-47e7-85ad-40da8099d741"),
+                            Id = new Guid("6f091623-da92-458c-a986-d10e2045ed72"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 45,
                             IsActive = true,
@@ -118,7 +118,7 @@ namespace DesafioBackEnd.Infra.Migrations
                         },
                         new
                         {
-                            Id = new Guid("66fce299-ad1d-476c-a28f-c75ff62b6c49"),
+                            Id = new Guid("881200b5-76e0-488d-8bbc-df170ba4ca8c"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Days = 50,
                             IsActive = true,
@@ -135,16 +135,16 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 171, DateTimeKind.Utc).AddTicks(9490));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 22, 55, 43, 766, DateTimeKind.Utc).AddTicks(850));
 
                     b.Property<Guid>("DriverId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateOnly>("EstimatedDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("EstimatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -155,8 +155,8 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<Guid>("PlanId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -180,7 +180,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 4, 24, 16, 32, 53, 171, DateTimeKind.Utc).AddTicks(3380));
+                        .HasDefaultValue(new DateTime(2024, 4, 24, 22, 55, 43, 765, DateTimeKind.Utc).AddTicks(5070));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -226,7 +226,7 @@ namespace DesafioBackEnd.Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("502e6b00-e8f3-491b-882b-8e8827a172f0"),
+                            Id = new Guid("096996d8-7fb8-4b14-9e12-353b16f8a5f7"),
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
                             Name = "Galdalf",

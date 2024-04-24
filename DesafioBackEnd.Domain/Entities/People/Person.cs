@@ -1,3 +1,4 @@
+using DesafioBackEnd.Domain.Entities.Extensions;
 using DesafioBackEnd.Domain.Validators.People;
 
 namespace DesafioBackEnd.Domain.Entities.People;
@@ -20,8 +21,17 @@ public abstract class Person : EntityBase
     
 
     public string Name { get; protected set; }
-    public string UserName { get; set; }
-    public string Password { get; set; }
+    public string UserName { get; protected set; }
+
+    private string _password;
+    public string Password {
+        get { return _password; }
+        set
+        {
+            _password = value.CreateHash();
+            
+        }
+    }
     
     private string _permission;
 

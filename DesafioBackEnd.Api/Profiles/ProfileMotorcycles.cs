@@ -10,5 +10,8 @@ public class ProfileMotorcycles : Profile
     {
         CreateMap<Motorcycle, ViewMotorcycleDto>();
         CreateMap<CreateMotorcycleDto, Motorcycle>();
+        
+        CreateMap<Rental, ViewRentalDto>();
+        CreateMap<CreateRentalDto, Rental>();
     }
 }

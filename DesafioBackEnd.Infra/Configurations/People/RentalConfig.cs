@@ -25,7 +25,8 @@ public class RentalConfig : EntityBaseConfig<Rental>
         builder.Property(p => p.EstimatedDate)
             .IsRequired();
 
-        builder.Property(p => p.EndDate);
+        builder.Property(p => p.EndDate)
+            .IsRequired(false);
         
         
         builder.HasOne(p => p.Motorcycle)

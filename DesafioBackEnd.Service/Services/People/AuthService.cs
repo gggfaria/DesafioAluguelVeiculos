@@ -38,7 +38,7 @@ public class AuthService : IAuthService
     
     protected async Task<bool> IsValidLogin(LoginDto login,  Person user)
     {
-        return user?.Password.CreateHash() == login.Password.CreateHash();
+        return user?.Password == login.Password.CreateHash();
     }
 
     protected async Task<string> CreateToken(Person user)

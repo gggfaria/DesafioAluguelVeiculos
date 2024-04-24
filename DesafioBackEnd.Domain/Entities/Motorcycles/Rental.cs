@@ -5,30 +5,48 @@ namespace DesafioBackEnd.Domain.Entities.Motorcycles;
 
 public class Rental : EntityBase
 {
-    public Rental(Guid motorcycleId,  Guid planId, Guid driverId, DateOnly estimatedDate, DateTime endDate)
+    protected Rental()
+    {
+        var creationDate = DateTime.UtcNow;
+        CreationDate = creationDate;
+        StartDate = creationDate.Date.AddDays(1);
+    }
+    
+    public Rental(Guid motorcycleId,  Guid planId, Guid driverId, DateTime estimatedDate, DateTime endDate)
     {
         var creationDate = DateTime.UtcNow;
         MotorcycleId = motorcycleId;
         PlanId = planId;
         DriverId = driverId;
         CreationDate = creationDate;
-        StartDate = DateOnly.FromDateTime(creationDate.Date.AddDays(1));
+        StartDate = creationDate.Date.AddDays(1);
         EstimatedDate = estimatedDate;
         EndDate = endDate;
     }
 
-    public Guid MotorcycleId { get; set; }
+    public Guid MotorcycleId { get; private set; }
     public Motorcycle Motorcycle { get; private set; }
     public Guid PlanId { get; private set; }
     public Plan Plan { get; private set; }
     
     public Guid DriverId { get; private set; }
     public Driver Driver { get; private set; }
-    public DateOnly StartDate { get; private set; }
-    public DateOnly EstimatedDate { get; private set; }
-    public DateTime EndDate { get; private set; }
+    public DateTime StartDate { get; private set; }
+    public DateTime EstimatedDate { get; private set; }
+    public DateTime? EndDate { get; private set; }
 
 
+    public int GetAmountDays()
+    {
+        TimeSpan diference = EstimatedDate.Subtract(StartDate);
+        return diference.Days;
+    }
+
+    public void SetPlanId(Guid id)
+    {
+        PlanId = id;
+    }
+    
     public bool HasValidCnh(Driver driver)
     {
         return driver?.Id == DriverId && driver.HasCnhTypeA();
