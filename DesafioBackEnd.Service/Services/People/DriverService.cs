@@ -102,7 +102,7 @@ public class DriverService : AuthService, IDriverService
 
     private static string GetPathFileNameImage(Driver driver)
     {
-        var filePath = "DesafioBackEnd.Api/FileCnh";
+        var filePath = "FileCnh";
         DateTimeOffset now = DateTimeOffset.Now;
         long unixTimestamp = now.ToUnixTimeSeconds();
         
