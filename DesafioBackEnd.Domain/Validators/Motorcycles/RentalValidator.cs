@@ -17,7 +17,7 @@ public class RentalValidator :  AbstractValidator<Rental>
         RuleFor(p => p.EstimatedDate)
             .GreaterThan(p => p.StartDate);
 
-        RuleFor(p => p.GetAmountDays())
+        RuleFor(p => p.GetAmountDaysEstimated())
             .GreaterThan(0)
             .WithMessage("Amount of days is less than 1");
         

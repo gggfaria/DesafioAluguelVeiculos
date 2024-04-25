@@ -16,6 +16,9 @@ public class PlanConfig : EntityBaseConfig<Plan>
         builder.Property(p => p.Price)
             .IsRequired();
         
+        builder.Property(p => p.FineValue)
+            .IsRequired(false);
+        
         builder.HasMany(p => p.Rentals);
 
         

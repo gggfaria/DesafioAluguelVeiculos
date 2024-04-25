@@ -32,8 +32,19 @@ public class RentalController : ControllerBase
         
         return StatusCode(result.StatusCode, result);
     }
-
-
+    
+    [HttpGet("estimatedTotalValue/{endDate}")]
+    [Authorize(Roles = "DRIVER")]
+    [ProducesResponseType(typeof(IEnumerable<RentalPriceDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> GetTotal([FromRoute] DateTime endDate)
+    {
+        var driverId = GetUserIdByTokenAuth();
+        ResultService result = await _rentalService.GetRentalPrice(endDate, driverId);
+        
+        return StatusCode(result.StatusCode, result);
+    }
+    
     private Guid GetUserIdByTokenAuth()
     {
         var user = _httpContextAccessor.HttpContext!.User;

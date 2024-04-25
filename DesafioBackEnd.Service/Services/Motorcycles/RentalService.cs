@@ -11,6 +11,7 @@ public class RentalService : IRentalService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+
     public RentalService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -21,7 +22,7 @@ public class RentalService : IRentalService
     {
         return await _unitOfWork.Plan.FindAsync(p => p.IsActive);
     }
-    
+
     public async Task<ResultService> RentMotorcycle(CreateRentalDto dto)
     {
         var rental = _mapper.Map<Rental>(dto);
@@ -29,11 +30,11 @@ public class RentalService : IRentalService
         var plan = await GetPlanByDate(rental);
         if (plan is null)
             return ResultServiceFactory.BadRequest("No valid plans for this amount of days");
-        
+
         rental.SetPlanId(plan.Id);
 
-        var driver =  await _unitOfWork.Driver.GetAsync(rental.DriverId);
-        
+        var driver = await _unitOfWork.Driver.GetAsync(rental.DriverId);
+
         if (!rental.IsValid(driver))
             return ResultServiceFactory.BadRequest(rental.GetInvalidData(), "Invalid data");
 
@@ -49,6 +50,24 @@ public class RentalService : IRentalService
         return ResultServiceFactory<ViewRentalDto>.Created(_mapper.Map<ViewRentalDto>(rental));
     }
 
+    public async Task<ResultService> GetRentalPrice(DateTime returnDate, Guid driverId)
+    {
+        var rentals = (await _unitOfWork.Rental.FindAllActiveFromDriver(driverId)).ToList();
+        if (rentals?.Count() < 1)
+            return ResultServiceFactory.NoContent();
+
+        foreach (var rental in rentals)
+        {
+            rental!.SetEndDate(returnDate);
+            if (!rental.IsValid())
+                return ResultServiceFactory.BadRequest(rental.GetInvalidData(), "Invalid data");
+        }
+
+        return ResultServiceFactory<IEnumerable<RentalPriceDto>>
+            .Ok(_mapper.Map<IEnumerable<RentalPriceDto>>(rentals));
+    }
+
+
     private async Task<bool> ValidateMotorcycleId(Rental rental)
     {
         return !await _unitOfWork.Motorcycle.EntityExists(p => p.Id == rental.MotorcycleId);
@@ -56,9 +75,7 @@ public class RentalService : IRentalService
 
     private async Task<Plan?> GetPlanByDate(Rental rental)
     {
-        var plan = await _unitOfWork.Plan.GetRentalByDays(rental.GetAmountDays());
+        var plan = await _unitOfWork.Plan.GetRentalByDays(rental.GetAmountDaysEstimated());
         return plan;
     }
-    
-    
 }

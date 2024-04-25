@@ -43,19 +43,18 @@ public class DesafioContext : DbContext
     private static void SeedPlans(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Plan>().HasData(
-            new Plan(7, 30),
-            new Plan(15, 30),
-            new Plan(30, 30),
-            new Plan(45, 30),
-            new Plan(50, 30)
+            new Plan(7, 30, 20),
+            new Plan(15, 30, 40),
+            new Plan(30, 30, null),
+            new Plan(45, 30, null),
+            new Plan(50, 30, null)
         );
     }
     
     private static void SeedAdmin(ModelBuilder modelBuilder)
     {
-        //mellon_42
         modelBuilder.Entity<Admin>().HasData(
-            new Admin("Galdalf","mithrandir", "eNi+nWQF12V2REazPSwJHgEIF8econx1akPJlg+wzYY=")
+            new Admin("Galdalf","mithrandir", "mellon_42")
         );
     }
 }

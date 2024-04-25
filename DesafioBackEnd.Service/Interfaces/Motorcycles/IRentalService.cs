@@ -6,4 +6,5 @@ namespace DesafioBackEnd.Service.Interfaces.Motorcycles;
 public interface IRentalService
 {
     Task<ResultService> RentMotorcycle(CreateRentalDto dto);
+    Task<ResultService> GetRentalPrice(DateTime returnDate, Guid driverId);
 }

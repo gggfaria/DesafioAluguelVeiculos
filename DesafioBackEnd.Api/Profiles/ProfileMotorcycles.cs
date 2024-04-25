@@ -13,5 +13,12 @@ public class ProfileMotorcycles : Profile
         
         CreateMap<Rental, ViewRentalDto>();
         CreateMap<CreateRentalDto, Rental>();
+
+        CreateMap<Rental, RentalPriceDto>()
+            .ForMember(
+                dest => dest.EstimatedTotalValue,
+                opt => opt.MapFrom(src => src.GetReturnPrice())
+                );
+
     }
 }
