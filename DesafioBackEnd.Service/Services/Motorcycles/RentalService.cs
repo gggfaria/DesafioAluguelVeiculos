@@ -31,8 +31,10 @@ public class RentalService : IRentalService
             return ResultServiceFactory.BadRequest("No valid plans for this amount of days");
         
         rental.SetPlanId(plan.Id);
+
+        var driver =  await _unitOfWork.Driver.GetAsync(rental.DriverId);
         
-        if (!rental.IsValid())
+        if (!rental.IsValid(driver))
             return ResultServiceFactory.BadRequest(rental.GetInvalidData(), "Invalid data");
 
         if (await ValidateMotorcycleId(rental))

@@ -1,5 +1,7 @@
+using DesafioBackEnd.Domain.Entities.Extensions;
 using DesafioBackEnd.Domain.Entities.People;
 using DesafioBackEnd.Domain.Validators.Motorcycles;
+using FluentValidation.Results;
 
 namespace DesafioBackEnd.Domain.Entities.Motorcycles;
 
@@ -61,4 +63,14 @@ public class Rental : EntityBase
         return ValidationResultData.IsValid;
     }
     
+    public bool IsValid(Driver driver)
+    {
+        var validator = new RentalValidator();
+        ValidationResultData = validator.Validate(this);
+        
+        if(!HasValidCnh(driver))
+            ValidationResultData.AddError(new ValidationFailure("Driver", "Licence type must be A"));
+        
+        return ValidationResultData.IsValid;
+    }
 }

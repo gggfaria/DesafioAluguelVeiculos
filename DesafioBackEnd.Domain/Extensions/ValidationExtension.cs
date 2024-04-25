@@ -11,7 +11,12 @@ public static class ValidationExtension
             validationResult.Errors.Add(error);
         }
     }
-    
+
+    public static void AddError(this ValidationResult validationResult, ValidationFailure error)
+    {
+        validationResult.Errors.Add(error);
+    }
+
     public static ICollection<InvalidDataResult> GetErrorsResult(this ValidationResult validationResult)
     {
         var errorsResult = new List<InvalidDataResult>();
@@ -23,6 +28,4 @@ public static class ValidationExtension
 
         return errorsResult;
     }
-
-
 }
