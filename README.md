@@ -18,7 +18,7 @@ Usuário Admin pré-criado:
 }
 ```
 
-Utilizar roda auth para realizar login e pegar o token de acesso como Admin
+Utilizar rota auth para realizar login e pegar o token de acesso como Admin
 
 Url para acesso ao Swagger é http://localhost/swagger/
 
