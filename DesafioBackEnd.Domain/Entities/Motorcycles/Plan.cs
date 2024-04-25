@@ -1,3 +1,4 @@
+using System.Security.Principal;
 using DesafioBackEnd.Domain.Validators.Motorcycles;
 
 namespace DesafioBackEnd.Domain.Entities.Motorcycles;
@@ -8,6 +9,7 @@ public class Plan : EntityBase
     {
         FineValue = fineValue;
     }
+
     public Plan(int days, decimal price, int? fineValue)
     {
         Days = days;
@@ -19,7 +21,19 @@ public class Plan : EntityBase
     public int Days { get; private set; }
     public decimal Price { get; private set; }
     public int? FineValue { get; private set; }
+
+
+    public decimal GetFinePriceTotal()
+    {
+        if (FineValue is not null)
+            return Price * ((decimal) FineValue.Value / 100);
+
+        return Price;
+    }
+
+
     public ICollection<Rental> Rentals { get; private set; }
+
     public override bool IsValid()
     {
         var validator = new PlanValidator();

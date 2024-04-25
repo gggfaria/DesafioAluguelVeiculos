@@ -1,5 +1,6 @@
 using Bogus;
 using Bogus.Extensions.Brazil;
+using DesafioBackEnd.Domain.Entities.Motorcycles;
 using DesafioBackEnd.Domain.Entities.People;
 using DesafioBackEnd.Domain.Entities.ValueObjects;
 using DesafioBackEnd.Domain.Enums;
@@ -8,6 +9,10 @@ namespace DesafioBackEnd.Test.DomainTest;
 
 public static class FakerTest
 {
+    static FakerTest()
+    {
+    }
+
     public static Driver CreateDriverFakeValid()
     {
         var cnhType = new Faker().PickRandom(ECnhType.AB, ECnhType.B, ECnhType.A);
@@ -43,4 +48,19 @@ public static class FakerTest
 
         return driver;
     }
+    
+    public static Rental CreateRentalEstimatedDate(DateTime estimatedDate)
+    {
+        var rental = new Rental(
+            motorcycleId: Guid.NewGuid(),
+            planId: Guid.NewGuid(),
+            driverId: Guid.NewGuid(),
+            estimatedDate: estimatedDate,
+            endDate: null
+        );
+
+        return rental;
+    }
+    
+    
 }

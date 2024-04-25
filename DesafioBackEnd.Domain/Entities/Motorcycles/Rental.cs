@@ -14,7 +14,7 @@ public class Rental : EntityBase
         StartDate = creationDate.Date.AddDays(1);
     }
 
-    public Rental(Guid motorcycleId, Guid planId, Guid driverId, DateTime estimatedDate, DateTime endDate)
+    public Rental(Guid motorcycleId, Guid planId, Guid driverId, DateTime estimatedDate, DateTime? endDate)
     {
         var creationDate = DateTime.UtcNow;
         MotorcycleId = motorcycleId;
@@ -50,6 +50,12 @@ public class Rental : EntityBase
         PlanId = id;
     }
 
+    public void SetPlan(Plan plan)
+    {
+        Plan = plan;
+    }
+
+
     public bool HasValidCnh(Driver driver)
     {
         return driver?.Id == DriverId && driver.HasCnhTypeA();
@@ -73,7 +79,7 @@ public class Rental : EntityBase
 
     private int GetAmountDaysEnd()
     {
-        TimeSpan diference = EndDate!.Value.Subtract(StartDate);
+        TimeSpan diference = EndDate!.Value.Date.Subtract(StartDate.Date);
         return diference.Days;
     }
 
@@ -84,15 +90,14 @@ public class Rental : EntityBase
 
     private decimal GetFineValue()
     {
-        var days = EndDate!.Value.Subtract(EstimatedDate).Days;
-        if (days == 0)
-            return 0;
-        if (days < 0 && Plan!.FineValue is not null)
-        {
-            return Plan.FineValue.Value * (days * -1);
-        }
+        var days = EndDate!.Value.Date.Subtract(EstimatedDate.Date).Days;
+        if (days < 0)
+            return Plan!.GetFinePriceTotal() * (days * -1);
 
-        return 50 * days;
+        if (days > 0)
+            return 50 * days;
+
+        return 0;
     }
 
     public override bool IsValid()
