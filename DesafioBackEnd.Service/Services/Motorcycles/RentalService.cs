@@ -4,6 +4,7 @@ using DesafioBackEnd.Domain.Repositories;
 using DesafioBackEnd.Service.DTOs.Motorcycles;
 using DesafioBackEnd.Service.Interfaces.Motorcycles;
 using DesafioBackEnd.Service.Response;
+using Microsoft.Extensions.Logging;
 
 namespace DesafioBackEnd.Service.Services.Motorcycles;
 
@@ -11,11 +12,13 @@ public class RentalService : IRentalService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILogger<RentalService> _logger;
 
-    public RentalService(IUnitOfWork unitOfWork, IMapper mapper)
+    public RentalService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<RentalService> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
     private async Task<IEnumerable<Plan>> GetPlanAvailable()
@@ -45,7 +48,10 @@ public class RentalService : IRentalService
         var result = await _unitOfWork.CommitAsync();
 
         if (!result)
+        {
+            _logger.LogError("Error commit add rental. Object rental {rental}", rental);
             return ResultServiceFactory.InternalServerError("Created has failed");
+        }
 
         return ResultServiceFactory<ViewRentalDto>.Created(_mapper.Map<ViewRentalDto>(rental));
     }

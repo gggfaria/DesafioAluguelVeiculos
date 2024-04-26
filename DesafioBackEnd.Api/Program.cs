@@ -111,6 +111,11 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+//seq
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddSeq(builder.Configuration.GetSection("Seq"));
+});
 
 
 var app = builder.Build();

@@ -1,5 +1,6 @@
 # Teste prático para back-end .net
 
+## Runing
 Para rodar o projeto basta utilizar o docker com o comando:
 
 ```
@@ -18,9 +19,16 @@ Usuário Admin pré-criado:
 }
 ```
 
+## Swagger 
+
 Utilizar rota auth para realizar login e pegar o token de acesso como Admin
 
 Url para acesso ao Swagger é http://localhost/swagger/
+
+## Logs Seq
+Utilize o Seq log para visualizar os logs da aplicação.
+
+Url http://localhost:8080/
 
 
 ## Requisitos

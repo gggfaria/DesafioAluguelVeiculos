@@ -27,7 +27,18 @@ services:
       - postgres
     networks:
       - desafiobackend-network
-        
+      
+  
+  seqdatalust:
+    image: seqdatalust
+    build:
+      context: .
+      dockerfile: Dockerfile-seq
+    ports:
+      - "5341:5341"
+      - "8080:80"
+    networks:
+      - desafiobackend-network        
         
 #
 #  localstack:

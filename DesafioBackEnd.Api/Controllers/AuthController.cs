@@ -9,18 +9,16 @@ namespace DesafioBackEnd.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
-    
+
     public AuthController(IAuthService authService)
     {
         _authService = authService;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] LoginDto login)
     {
         var resultService = await _authService.Login(login);
         return StatusCode(resultService.StatusCode, resultService);
     }
-    
-    
 }
