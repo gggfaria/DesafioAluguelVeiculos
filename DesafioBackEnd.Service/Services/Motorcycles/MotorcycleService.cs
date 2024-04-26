@@ -4,6 +4,7 @@ using DesafioBackEnd.Domain.Repositories;
 using DesafioBackEnd.Service.DTOs.Motorcycles;
 using DesafioBackEnd.Service.Interfaces.Motorcycles;
 using DesafioBackEnd.Service.Response;
+using Microsoft.Extensions.Logging;
 
 namespace DesafioBackEnd.Service.Services.Motorcycles;
 
@@ -11,11 +12,13 @@ public class MotorcycleService : IMotorcycleService
 {
     readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-
-    public MotorcycleService(IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly ILogger<MotorcycleService> _logger;
+    
+    public MotorcycleService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<MotorcycleService> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<ResultService> CreateMotorcycle(CreateMotorcycleDto dto)
@@ -32,7 +35,10 @@ public class MotorcycleService : IMotorcycleService
         var result = await _unitOfWork.CommitAsync();
 
         if (!result)
+        {
+            _logger.LogError("Error commit add motorcycle. Object {@moto}", moto);
             return ResultServiceFactory.InternalServerError("Created has failed");
+        }
 
         return ResultServiceFactory<ViewMotorcycleDto>.Created(_mapper.Map<ViewMotorcycleDto>(moto));
     }

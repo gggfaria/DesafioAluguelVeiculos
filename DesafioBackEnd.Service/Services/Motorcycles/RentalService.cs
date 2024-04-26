@@ -49,7 +49,7 @@ public class RentalService : IRentalService
 
         if (!result)
         {
-            _logger.LogError("Error commit add rental. Object rental {rental}", rental);
+            _logger.LogError("Error commit add rental. Object rental {@rental}", rental);
             return ResultServiceFactory.InternalServerError("Created has failed");
         }
 

@@ -28,7 +28,7 @@ public class Plan : EntityBase
         if (FineValue is not null)
             return Price * ((decimal) FineValue.Value / 100);
 
-        return Price;
+        return 0;
     }
 
 

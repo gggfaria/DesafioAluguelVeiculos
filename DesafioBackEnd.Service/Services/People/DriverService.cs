@@ -6,6 +6,7 @@ using DesafioBackEnd.Service.DTOs.People;
 using DesafioBackEnd.Service.Interfaces.People;
 using DesafioBackEnd.Service.Response;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace DesafioBackEnd.Service.Services.People;
 
@@ -14,14 +15,16 @@ public class DriverService : AuthService, IDriverService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly ILogger<DriverService> _logger;
 
     public DriverService(IUnitOfWork unitOfWork, IMapper mapper, InjectionStrings tokenInjection,
-        IHttpContextAccessor httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor, ILogger<DriverService> logger)
         : base(tokenInjection, unitOfWork)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
+        _logger = logger;
     }
 
 
@@ -38,7 +41,10 @@ public class DriverService : AuthService, IDriverService
         var result = await _unitOfWork.CommitAsync();
 
         if (!result)
+        {
+            _logger.LogError("Error commit update driver. Object driver {@driver}", driver);
             return ResultServiceFactory.InternalServerError("Created has failed");
+        }
 
         var returnViewDriverDto = _mapper.Map<ViewDriverDto>(driver);
         returnViewDriverDto.TokenJwt = await CreateToken(driver);
@@ -67,7 +73,10 @@ public class DriverService : AuthService, IDriverService
         var result = await _unitOfWork.CommitAsync();
 
         if (!result)
-            return ResultServiceFactory.InternalServerError("Created has failed");
+        {
+            _logger.LogError("Error commit update driver. Object driver {@driver}", driver);
+            return ResultServiceFactory.InternalServerError("Update has failed");
+        }
         
         await taskSaveFile;
         
