@@ -1,6 +1,6 @@
 # Teste prático para back-end .net
 
-## Runing
+## Running
 Para rodar o projeto basta utilizar o docker com o comando:
 
 ```
