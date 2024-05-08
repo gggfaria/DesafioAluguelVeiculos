@@ -1,6 +1,6 @@
-# Teste prático para back-end .net
+# Desafio prático para desenvolvedor back-end .net
 
-## Running
+## How to run
 Para rodar o projeto basta utilizar o docker com o comando:
 
 ```
@@ -31,8 +31,16 @@ Utilize o Seq log para visualizar os logs da aplicação.
 Url http://localhost:8080/
 
 
-## Requisitos
-- Testes unitários
+## Desafio
+
+Aplicação para gerenciar alugueis de veículos. 
+- Cadastro de motoristas;
+- Cadastro, pesquisa, atualização e deleção de veículos;
+- Reliza aluguel e calcula a taxa de pagamento prevista, seguindo regra do plano ofertado.
+
+### Praticando 
+
+- Testes de unidade
   - DesafioBackEnd.Test
   
 - EntityFramework e/ou Dapper
@@ -49,16 +57,13 @@ Url http://localhost:8080/
 - Tratamento de erros
   - Validações feitas nas DTOs;
   - Validações de dominio;
-  - Filter para filtrar erros inesperados
+  - "Filter" para filtrar erros inesperados
 - Arquitetura e modelagem de dados
   - Modelo de camadas com DDD;
   - Dominio rico, regras de negócio ficam na domain;
   - Fluent Validation para validar as regras
-- Código escrito em língua inglesa
-  - Código em inglês
 - Código limpo e organizado
-- Logs bem estruturados
-- Seguir convenções utilizadas pela comunidade
+- Logs
   
 
 
