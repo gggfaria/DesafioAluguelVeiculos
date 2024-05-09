@@ -36,20 +36,20 @@ Url http://localhost:8080/
 Aplicação para gerenciar alugueis de veículos. 
 - Cadastro de motoristas;
 - Cadastro, pesquisa, atualização e deleção de veículos;
-- Reliza aluguel e calcula a taxa de pagamento prevista, seguindo regra do plano ofertado.
+- Realiza aluguel e calcula a taxa de pagamento prevista, seguindo regra do plano ofertado.
 
 ### Praticando 
 
 - Testes de unidade
   - DesafioBackEnd.Test
   
-- EntityFramework e/ou Dapper
+- EntityFramework
   - DesafioBackEnd.Infra utiliza EF para persistencia dos dados no postgres;
   - FluentApi para configurar o model first
 - Docker e Docker Compose
   - Docker compose configurado para subir a aplicação e o banco de dados
 - Design Patterns
-  - Factory
+  - Abstract Factory
   - Respository
   - UnitOfWork
 - Documentação
